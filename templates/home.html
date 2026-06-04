@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 text-center">Global Feed</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        {% for post in posts %}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-white d-flex align-items-center">
+                    <a href="{{ url_for('profile', user_id=post.author.id) }}" class="fw-bold text-decoration-none text-dark">
+                        @{{ post.author.username }}
+                    </a>
+                    <small class="text-muted ms-auto">{{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
+                </div>
+                <img src="{{ post.image_url }}" class="card-img-top" alt="Post Image" style="max-height: 500px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ url_for('post_detail', post_id=post.id) }}" class="text-decoration-none text-dark">{{ post.title }}</a>
+                    </h5>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
